@@ -30,10 +30,10 @@ The entity relations are demostrated in the models.py and inforced in the web ap
 
 
 Step 1. **Clone the Repository:**
-  In your terminal: git clone https://github.com/GUNELIS/PITC-TASK-BEN-HASENSON.git
+  In your terminal: git clone https://github.com/GUNELIS/Ben_PITC_Task.git
 
 
-Steo 2. **Navigate to the Project Directory called "PITC-TASK-BEN-HASENSON":**
+Steo 2. **Navigate to the Project Directory called "Ben_PITC_Task":**
   cd <project-directory>
 
 Step 3. **Activate the Virtual Environment:**
