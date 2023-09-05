@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Past Orders</h1>
+    <ul>
+        {% for order in orders %}
+            <li>{{ order.date }} - {{ order.service.name }} by {{ order.service_provider.name }}</li>
+            <p>Price: ${{ order.get_price }}</p>
+
+        {% endfor %}
+    </ul>
+{% endblock %}

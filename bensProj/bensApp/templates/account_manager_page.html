@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Account Manager Page</h1>
+<br/>
+<div class="row">
+    <div class="col-md-4">
+      <h2>My Service Providers & Services</h2>
+      <select id="serviceProviderServiceDropdown" class="form-control">
+        {% for service_provider in service_providers %}
+          <optgroup label="{{ service_provider.name }}">
+            {% for service in services %}
+                {% if service.service_provider.id == service_provider.id %}
+                    <option value="{{ service.id }}">{{ service.name }}</option>
+                {% endif %}
+            {% endfor %}
+          </optgroup>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4">
+      <h2>Orders</h2>
+      <ul>
+        {% for order in orders %}
+          <li>
+            {{ order.customer.name }} - {{ order.date }}
+            <ul>
+              <li>{{ order.service_provider.name }} - {{ order.service.name }}</li>
+            </ul>
+          </li>
+          <p>Price: ${{ order.get_price }}</p>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <h2>My Customers</h2>
+      <ul>
+        {% for customer in customers %}
+          <li>{{ customer.name }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+</div>
+{% endblock %}

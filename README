@@ -1,0 +1,98 @@
+# Digital Platform
+
+
+Here We can see a small platform where there are several entities : Account Managers, Customers, Service Providers, Services and Orders.
+
+
+An account manager can login to the system with their credentials and have access to their own registered customers, their own service providers along with the associated services,  and finally their own customers' order details.
+
+
+A customer can login and and in order to get a service, they can choose to connect with one of the account managers, and they will be redirected to a page with all the services offered by that account manager's service providers only. They can add multiple services to their basket and create an order, which will update the account manager and they will have it logged in their Account Manager interface. Each customer can also access their own order history.
+
+
+Please See the Short Demo Video demonstrating the flow.
+
+
+Relations:
+
+The code demostrating the models can be found in bensApp --> models.py
+
+The Entities are related within the models.py by using ForeignKeys, ManyToManyFields,OneToOneField as they enforce referential integrity at the DB level.
+
+Example: In Some cases, such as the Customer & Account Manager relationship, the ManyToManyFields is implemented as Customers could have several Account Managers and vice versa.    
+
+The entity relations are demostrated in the models.py and inforced in the web application itself and the GUI. 
+
+## If you would like to play with web app:
+(keep in mind that the app is lacking some basic functionality, it was designed just for visualization of the relevant relations)
+
+## Setup & Installation Steps:
+
+
+Step 1. **Clone the Repository:**
+  In your terminal: git clone https://github.com/GUNELIS/PITC-TASK-BEN-HASENSON.git
+
+
+Steo 2. **Navigate to the Project Directory called "PITC-TASK-BEN-HASENSON":**
+  cd <project-directory>
+
+Step 3. **Activate the Virtual Environment:**
+  for Windows: .\bens_env\Scripts\activate
+  for Mac & Linux : source bens_env/Scripts/activate
+  you should see (bens_env) in the terminal once it is activated.
+
+Step 4. **Install the Project Dependencies:**
+  Navigate to the bensProj directory, type:
+    cd bendProj
+  once in the bensProj directory , type : 
+    pip install -r requirements.txt
+
+Step 5. **Migrate DB info and Run server:**
+  type:
+  python manage.py migrate
+  python manage.py runserver
+
+Step 6. **Go to your local browser**
+  http://127.0.0.1:8000/
+
+Step 7. **Playing with the web app**
+  Enter with customer or an Account Manager user (password and username provided below) to see the differernt possibilities for the different users by checking out their Account button in the navigation bar. 
+   
+## Usage
+
+Login as a regular customer (service purchase options) or an AccountManager (available order and customer data).
+
+
+to See the Customer pages login with one of the following:
+
+Customer1: username - john , pwrd - antebe70john
+Customer2: username - paul , pwrd - antebe70paul
+Customer3: username - george , pwrd - antebe70george
+Customer4: username - ringo , pwrd - antebe70ringo
+
+
+to See the AccountManager pages login with one of the following:
+
+
+AccountManager1: username - claudia , pwrd - antebe70claudia
+AccountManager2: username - parand , pwrd - antebe70parand
+AccountManager3: username - am3 , pwrd - antebe70am3
+
+
+Flows During an Order:
+
+Customer perspective:
+
+
+Customer login ---> Customer Contacts Account Manager ---> Customer choses a service from the Manager's associated Service Providers ---> Customer adds service to basket ---> order placed ---> Customer can Contact a different Account Manager to access different services
+
+
+Account Manager perspective:
+
+
+Customer Contacts A.M ---> Customer Added To A.M's list of customers ---> Order placed and logged in A.M's page
+
+
+
+
+

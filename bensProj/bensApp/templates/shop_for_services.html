@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2> These are the Services Offered by this Account Manager</h2>
+    <br/><br/>
+    <div class="row">
+      {% for service in services %}
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ service.name }}</h5>
+              <p class="card-text">Price: ${{ service.price }}</p>
+              <button class="btn btn-primary add-to-order" data-service-id="{{ service.id }}" data-service-name="{{ service.name }}" data-service-price="{{ service.price }}">Add to Order</button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <br/>
+    <h2>My Order</h2>
+    <table class="table" id="order-table">
+      <thead>
+        <tr>
+          <th>Service Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="text-right">Total:</td>
+          <td id="total-price">$0</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <form method="post" action="{% url 'home' %}">
+    {% csrf_token %}
+    <input type="hidden" name="service_ids" id="service-ids">
+    <input type="hidden" name="account_manager_id" value="{{ account_manager.id }}">
+    <button type="submit" class="btn btn-success">Let's order!</button>
+  </form>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    const orderTable = document.getElementById('order-table').getElementsByTagName('tbody')[0];
+    const totalPriceElement = document.getElementById('total-price');
+    const serviceIdsElement = document.getElementById('service-ids');
+    let totalPrice = 0;
+    let serviceIds = [];
+
+    document.querySelectorAll('.add-to-order').forEach(button => {
+      button.addEventListener('click', event => {
+        const serviceId = event.target.getAttribute('data-service-id');
+        const serviceName = event.target.getAttribute('data-service-name');
+        const servicePrice = parseFloat(event.target.getAttribute('data-service-price'));
+
+        // Update the total price
+        totalPrice += servicePrice;
+        totalPriceElement.innerText = '$' + totalPrice.toFixed(2);
+
+        // Add the service to the order table
+        const row = orderTable.insertRow();
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        cell1.innerHTML = serviceName;
+        cell2.innerHTML = '$' + servicePrice.toFixed(2);
+
+        // Add the service ID to the list of selected services
+        serviceIds.push(serviceId);
+        serviceIdsElement.value = serviceIds.join(',');
+      });
+    });
+  });
+</script>
+{% endblock %}

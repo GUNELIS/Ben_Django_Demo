@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Select Account Manager</h2>
+    <div class="row">
+      {% for account_manager in account_managers %}
+        <div class="col-md-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">{{ account_manager.user.username }}</h5>
+              <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="account_manager_username" value="{{ account_manager.user.username }}">
+                <button type="submit" class="btn btn-primary">Select</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
